@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
 
-public class SimpleUser implements UserDetails, Serializable {
+public class SimpleUser implements UserDetails{
 
   private static final long serialVersionUID = -7144174657188362966L;
 
