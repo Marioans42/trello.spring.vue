@@ -11,6 +11,7 @@ import com.taskagile.domain.model.user.RegistrationException;
 import com.taskagile.domain.model.user.RegistrationManagement;
 import com.taskagile.domain.model.user.SimpleUser;
 import com.taskagile.domain.model.user.User;
+import com.taskagile.domain.model.user.UserId;
 import com.taskagile.domain.model.user.UserRepository;
 import com.taskagile.domain.model.user.event.UserRegisteredEvent;
 
@@ -79,5 +80,12 @@ public class UserServiceImpl implements UserService {
         MessageVariable.from("user", user)
       );
     }
+
+
+	@Override
+	public User findById(UserId userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
 }

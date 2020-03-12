@@ -23,7 +23,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
  */
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    private static final String[] PUBLIC = new String[]{ "/error", "/login", "/logout", "/register", "/api/registrations" };
+    private static final String[] PUBLIC = new String[]{ "/","/error", "/login", "/logout", "/register", "/api/registrations" };
     
       @Override
       protected void configure(HttpSecurity http) throws Exception {
