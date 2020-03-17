@@ -1,11 +1,14 @@
 package com.taskagile.domain.model.board;
 
+import org.springframework.stereotype.Component;
+
 import com.taskagile.domain.model.team.TeamId;
 import com.taskagile.domain.model.user.UserId;
 
 /**
  * BoardManagement
  */
+@Component
 public class BoardManagement {
 
     private BoardRepository boardRepository;

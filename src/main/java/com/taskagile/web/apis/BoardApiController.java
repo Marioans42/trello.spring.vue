@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * BoardApiController
  */
+@Controller
 public class BoardApiController {
 
     private BoardService boardService;

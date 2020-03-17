@@ -12,6 +12,8 @@ import java.util.Objects;
 /**
  * Board
  */
+@Entity
+@Table(name = "board")
 public class Board extends AbstractBaseEntity{
 
     /**

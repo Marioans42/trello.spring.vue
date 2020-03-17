@@ -3,6 +3,8 @@ package com.taskagile.web.results;
 import com.taskagile.domain.model.board.Board;
 import com.taskagile.domain.model.team.Team;
 import com.taskagile.domain.model.user.SimpleUser;
+import com.taskagile.domain.model.user.User;
+
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
@@ -12,73 +14,77 @@ import java.util.Map;
 
 public class MyDataResult {
 
-  public static ResponseEntity<ApiResult> build(SimpleUser currentUser, List<Team> teams, List<Board> boards) {
-    Map<String, Object> user = new HashMap<>();
-    user.put("name", currentUser.getUsername());
+	public static ResponseEntity<ApiResult> build(User user, List<Team> teams, List<Board> boards,
+			String realTimeServerUrl, String realTimeToken) {
 
-    List<TeamResult> teamResults = new ArrayList<>();
-    for (Team team : teams) {
-      teamResults.add(new TeamResult(team));
-    }
+		Map<String, Object> userData = new HashMap<>();
+		userData.put("name", user.getFirstName() + " " + user.getLastName());
+		userData.put("token", realTimeToken);
 
-    List<BoardResult> boardResults = new ArrayList<>();
-    for (Board board : boards) {
-      boardResults.add(new BoardResult(board));
-    }
+		Map<String, Object> settings = new HashMap<>();
+		settings.put("realTimeServerUrl", realTimeServerUrl);
 
-    ApiResult apiResult = ApiResult.blank()
-      .add("user", user)
-      .add("teams", teamResults)
-      .add("boards", boardResults);
+		List<TeamResult> teamResults = new ArrayList<>();
+		for (Team team : teams) {
+			teamResults.add(new TeamResult(team));
+		}
 
-    return Result.ok(apiResult);
-  }
+		List<BoardResult> boardResults = new ArrayList<>();
+		for (Board board : boards) {
+			boardResults.add(new BoardResult(board));
+		}
 
-  private static class TeamResult {
-    private long id;
-    private String name;
+		ApiResult apiResult = ApiResult.blank().add("user", userData).add("teams", teamResults)
+				.add("boards", boardResults).add("settings", settings);
 
-    TeamResult(Team team) {
-      this.id = team.getId().value();
-      this.name = team.getName();
-    }
+		return Result.ok(apiResult);
+	}
 
-    public long getId() {
-      return id;
-    }
+	private static class TeamResult {
+		private long id;
+		private String name;
 
-    public String getName() {
-      return name;
-    }
-  }
+		TeamResult(Team team) {
+			this.id = team.getId().value();
+			this.name = team.getName();
+		}
 
-  private static class BoardResult {
-    private long id;
-    private String name;
-    private String description;
-    private long teamId;
+		public long getId() {
+			return id;
+		}
 
-    BoardResult(Board board) {
-      this.id = board.getId().value();
-      this.name = board.getName();
-      this.description = board.getDescription();
-      this.teamId = board.getTeamId().value();
-    }
+		public String getName() {
+			return name;
+		}
+	}
 
-    public long getId() {
-      return id;
-    }
+	private static class BoardResult {
+		private long id;
+		private String name;
+		private String description;
+		private long teamId;
 
-    public String getName() {
-      return name;
-    }
+		BoardResult(Board board) {
+			this.id = board.getId().value();
+			this.name = board.getName();
+			this.description = board.getDescription();
+			this.teamId = board.getTeamId().value();
+		}
 
-    public String getDescription() {
-      return description;
-    }
+		public long getId() {
+			return id;
+		}
 
-    public long getTeamId() {
-      return teamId;
-    }
-  }
+		public String getName() {
+			return name;
+		}
+
+		public String getDescription() {
+			return description;
+		}
+
+		public long getTeamId() {
+			return teamId;
+		}
+	}
 }

@@ -15,6 +15,8 @@ import javax.persistence.TemporalType;
 import com.taskagile.domain.common.model.AbstractBaseEntity;
 import com.taskagile.domain.model.user.UserId;
 
+
+
 /**
  * Team
  */
